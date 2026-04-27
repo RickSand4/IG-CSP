@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Gestión de Competencias | Code Arena</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" th:href="@{/css/retro-bit.css}">
+</head>
+<body class="crt">
+<div th:replace="~{Fragments/navbar :: navbar}"></div>
+
+<div class="container mt-5 pt-4">
+    <div class="pixel-panel p-4">
+        <h1 class="pixel-title mb-4">🏁 GESTIÓN DE COMPETENCIAS</h1>
+
+        <div th:if="${exito}" class="alert alert-success">✅ <span th:text="${exito}"></span></div>
+        <div th:if="${error}" class="alert alert-danger">❌ <span th:text="${error}"></span></div>
+
+        <!-- Filtros -->
+        <div class="mb-3">
+            <a th:href="@{/admin/competencias}"
+               class="btn btn-sm"
+               th:classappend="${mostrandoArchivadas == null || !mostrandoArchivadas} ? 'btn-pixel' : 'btn-pixel secondary'">
+                📋 COMPETENCIAS ACTIVAS
+            </a>
+            <a th:href="@{/admin/competencias/archivadas}"
+               class="btn btn-sm"
+               th:classappend="${mostrandoArchivadas} ? 'btn-pixel' : 'btn-pixel secondary'">
+                🗄️ ARCHIVADAS
+            </a>
+            <a th:href="@{/admin/competencias/nueva}"
+               class="btn-pixel ms-3 text-decoration-none d-inline-block">
+                + NUEVA COMPETENCIA
+            </a>
+        </div>
+
+        <table class="table table-dark table-striped">
+            <thead>
+            <tr style="font-family:'Press Start 2P';font-size:0.6rem;">
+                <th>TÍTULO</th>
+                <th>ESTADO</th>
+                <th>FECHA CREACIÓN</th>
+                <th>ACCIONES</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr th:each="competencia : ${competencias}">
+                <td th:text="${competencia.titulo}">Título</td>
+
+                <td>
+                        <span th:class="'badge ' + (${competencia.estado.name() == 'ACTIVA'} ? 'bg-success' : (${competencia.estado.name() == 'FINALIZADA'} ? 'bg-secondary' : 'bg-warning'))"
+                              th:text="${competencia.estado}">Estado</span>
+                </td>
+
+                <td th:text="${#temporals.format(competencia.fechaCreacion, 'dd/MM/yyyy')}">01/01/2025</td>
+
+                <td>
+                    <a th:href="@{/admin/competencias/{id}(id=${competencia.id})}"
+                       class="btn btn-sm btn-info">👁️ Ver</a>
+                    <a th:href="@{/admin/competencias/{id}/editar(id=${competencia.id})}"
+                       class="btn btn-sm btn-warning">✏️ Editar</a>
+                    <button type="button" class="btn btn-sm btn-danger"
+                            data-bs-toggle="modal"
+                            data-bs-target="#modalEliminar"
+                            th:data-id="${competencia.id}"
+                            th:data-titulo="${competencia.titulo}"
+                            th:data-inscritos="${competencia.tieneInscritos() ? 'true' : 'false'}">
+                        🗑️ Eliminar
+                    </button>
+                </td>
+
+            </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
+
+<!-- Modal de confirmación -->
+<div class="modal fade" id="modalEliminar" tabindex="-1" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content pixel-panel" style="background:#0f1921; color:#b0f0d0;">
+            <div class="modal-header">
+                <h5 class="modal-title pixel-title" style="font-size:0.8rem;">⚠️ CONFIRMAR ELIMINACIÓN</h5>
+                <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"></button>
+            </div>
+            <div class="modal-body">
+                <p id="mensajeConfirmacion">¿Estás seguro de que deseas eliminar esta competencia?</p>
+                <p id="avisoInscritos" style="color:#f0b0b0; display:none;">
+                    ⚠️ Esta competencia tiene estudiantes inscritos. Será archivada, no eliminada.
+                </p>
+            </div>
+            <div class="modal-footer">
+                <form id="formEliminar" method="post" action="#">
+                    <input type="hidden" name="forzar" id="inputForzar" value="false">
+                    <button type="button" class="btn-pixel secondary" data-bs-dismiss="modal">CANCELAR</button>
+                    <button type="submit" class="btn-pixel">CONFIRMAR</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Carga de dependencias desde CDN -->
+<script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+
+<script>
+    $(function() {
+        $('#modalEliminar').on('show.bs.modal', function (event) {
+            var button = $(event.relatedTarget);
+            var id = button.data('id');
+            var titulo = button.data('titulo');
+            var tieneInscritos = button.data('inscritos') === 'true';
+
+            console.log('Eliminando:', {id, titulo, inscritos: tieneInscritos});
+
+            if (!id || !titulo) {
+                console.error('Faltan datos del botón.');
+                return;
+            }
+
+            $('#mensajeConfirmacion').text('¿Eliminar la competencia "' + titulo + '"?');
+            $('#formEliminar').attr('action', '/admin/competencias/' + id + '/eliminar');
+
+            if (tieneInscritos) {
+                $('#avisoInscritos').show();
+                $('#inputForzar').val('false');
+            } else {
+                $('#avisoInscritos').hide();
+                $('#inputForzar').val('true');
+            }
+        });
+    });
+</script>
+</body>
+</html>
