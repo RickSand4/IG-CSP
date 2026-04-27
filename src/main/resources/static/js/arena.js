@@ -117,7 +117,6 @@ $(document).ready(function() {
             }
         });
     });
-
     // Botón SUBMIT (similar a RUN)
     $('#submitBtn').click(function() {
         $('#runCodeBtn').click();
@@ -152,5 +151,6 @@ $(document).ready(function() {
     // Simular temporizador global (estático)
     function updateGlobalTimer() {
         // No implementado en este ejemplo, se puede añadir.
+        //che js ni sirve alv, la arena.html utiliza su propio js.
     }
 });

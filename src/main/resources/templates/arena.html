@@ -1,0 +1,287 @@
+<!DOCTYPE html>
+<html lang="es" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+    <title>CODE ARENA · 8-BIT COMPETITION</title>
+    <!-- Fuentes retro + pixel -->
+    <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&family=VT323&display=swap" rel="stylesheet">
+
+    <link rel="stylesheet" th:href="@{/webjars/bootstrap/css/bootstrap.min.css}">
+    <link rel="stylesheet" th:href="@{/css/retro-bit.css}">
+
+</head>
+<body class="crt">
+<div class="crt-monitor">
+    <div class="screen-content">
+
+        <!-- header principañ -->
+        <header class="game-header">
+            <div class="pixel-title">
+                <span>⚡CODE·ARENA⚡</span>
+            </div>
+            <div class="pixel-badge">
+                █ 1v1 BATTLE █<br>ROUND 3
+            </div>
+            <div style="display:flex; gap:6px;">
+                <span class="pixel-badge" style="background:#2a1a3a;">⏱️ 14:28</span>
+                <span class="pixel-badge">🎮 LV.8</span>
+            </div>
+        </header>
+
+        <!-- NAVEGACIÓN -->
+        <nav class="nav-pixel">
+            <a class="nav-link active" href="#">▶ ARENA</a>
+            <a class="nav-link" th:href="@{/estudiante/search-competitions}">▷ BÚSQUEDA</a>
+            <a class="nav-link" th:href="@{/estudiante/rankings}">▷ RANKING</a>
+            <a class="nav-link" th:href="@{/profile}">▷ PERFIL</a>
+            <a class="nav-link" th:href="@{/dashboard}">▷ ⚙️ DASHBOARD</a>
+        </nav>
+
+        <!-- Marco -->
+        <div class="marquee-8bit">
+            <div class="marquee-content">
+                ⬇️ SECCIÓN 1/3 · TIEMPO LÍMITE 12:00 ⬇️ &nbsp;&nbsp; ★ RACHA ACTIVA: 7 DÍAS ★ &nbsp;&nbsp; ⬇️ PRÓXIMO HITO 2500 XP ⬇️
+            </div>
+        </div>
+
+        <!--  PROBLEMAS · EDITOR · ESTADÍSTICAS -->
+        <div class="arena-grid">
+            <div class="pixel-panel">
+                <div class="panel-title">
+                    <span>📋 SECCIONES</span>
+                    <span class="blink" style="margin-left:auto;">⚡</span>
+                </div>
+
+                <!-- TIMER ESPECÍFICO POR SECCIÓN -->
+                <div class="timer-box">
+                    <div class="timer-label">SECCIÓN ACTUAL</div>
+                    <div class="timer-value" id="sectionTimerDisplay">09:42</div>
+                    <div style="font-family:'VT323'; color:#9ad0d0;">1/3 · FUNDAMENTOS</div>
+                </div>
+
+                <ul class="problem-list">
+                    <li class="problem-item" data-section="1">
+                        <span>🔹 A. VARIABLES</span>
+                        <span class="problem-tag">✔️</span>
+                    </li>
+                    <li class="problem-item" data-section="1">
+                        <span>🔸 B. CONDICIONALES</span>
+                        <span class="problem-tag">⏳</span>
+                    </li>
+                    <li class="problem-item" data-section="2">
+                        <span>🔹 C. BUCLES</span>
+                        <span class="problem-tag">⚔️</span>
+                    </li>
+                    <li class="problem-item" data-section="2">
+                        <span>🔸 D. FUNCIONES</span>
+                        <span class="problem-tag">🔒</span>
+                    </li>
+                    <li class="problem-item" data-section="3">
+                        <span>🔹 E. ARREGLOS</span>
+                        <span class="problem-tag">🔒</span>
+                    </li>
+                </ul>
+                <div style="margin-top:16px;">
+                    <span class="section-timer-mini">⏱️ SECCIÓN 2 inicia en 03:22</span>
+                </div>
+                <div style="font-family:'VT323'; color:#b0d0d0; margin-top:12px;">
+                    ▶ PROGRESO: 2/5 completados
+                </div>
+            </div>
+
+            <!-- COL CENTRAL: PROBLEMA ACTIVO + EDITOR -->
+            <div class="pixel-panel">
+                <div class="panel-title">
+                    <span>📄 DESAFÍO B · CONDICIONALES</span>
+                    <span class="difficulty">MEDIUM</span>
+                </div>
+                <div style="font-family:'VT323'; font-size:1.5rem; color:#c0e6e0; margin-bottom:8px;">
+                    Escribe un programa que determine si un número es par o impar.
+                </div>
+                <div style="background:#0f1e28; padding:8px; border:2px solid #3a7a8a; margin-bottom:16px;">
+                    <span style="font-family:'Press Start 2P'; font-size:0.5rem;">📌 EJEMPLO: entrada 5 → "impar"</span>
+                </div>
+                <!-- Editor simulado -->
+                <div class="editor-area">
+                    <div style="display:flex; gap:10px; margin-bottom:8px;">
+                        <span style="font-family:'Press Start 2P'; font-size:0.6rem; color:#6ad0d0;">PYTHON 3.11</span>
+                        <span style="margin-left:auto; font-family:'VT323';">LÍNEA 3</span>
+                    </div>
+                    <div class="code-mock">
+                        <span style="color:#f7b0d0;">def</span> <span style="color:#a0f0c0;">par_impar</span>(n):<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;<span style="color:#f0e66c;">if</span> n % 2 == 0:<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span style="color:#a0f0c0;">return</span> <span style="color:#f0b0a0;">"par"</span><br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;<span style="color:#f0e66c;">else</span>:<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span style="color:#a0f0c0;">return</span> <span style="color:#f0b0a0;">"impar"</span><br>
+                        <span style="color:#6ad0d0;"># ejecuta tu código</span>
+                    </div>
+                </div>
+                <!-- Botones pixel -->
+                <div>
+                    <button class="pixel-button" id="runCodeBtn">▶ RUN CODE</button>
+                    <button class="pixel-button secondary" id="submitBtn">📤 SUBMIT</button>
+                    <button class="pixel-button secondary" id="nextProblemBtn">⏩ SIGUIENTE</button>
+                </div>
+                <div style="margin-top:12px; font-family:'VT323'; color:#aacad0;">
+                    🧪 TEST 1/3 · ✅ PASÓ · TIEMPO RESTANTE SECCIÓN: 09:42
+                </div>
+            </div>
+
+            <!-- COL DERECHA: SCORE + STATS + RACHA -->
+            <div class="pixel-panel">
+                <div class="panel-title">🏆 STANDINGS</div>
+                <ul style="list-style:none;">
+                    <li class="score-item"><span>1UP · P1</span><span>1250 XP</span></li>
+                    <li class="score-item"><span>2UP · CPU</span><span>980 XP</span></li>
+                    <li class="score-item"><span>3RD · BIT</span><span>720 XP</span></li>
+                </ul>
+                <div style="margin:18px 0;">
+                    <div class="panel-title" style="margin-bottom:8px;">📊 TU PROGRESO</div>
+                    <div class="xp-bar-container">
+                        <div class="xp-fill"></div>
+                    </div>
+                    <div style="display:flex; justify-content:space-between; font-family:'VT323'; color:#b0f0b0;">
+                        <span>NIVEL 8</span><span>1680/2500 XP</span>
+                    </div>
+                </div>
+                <div class="timer-box" style="margin-top:6px;">
+                    <div class="timer-label">⏱️ RACHA</div>
+                    <div style="font-family:'VT323'; font-size:2.8rem; color:#fce684;">7 🔥</div>
+                    <div>días consecutivos</div>
+                </div>
+                <div style="margin-top:16px; border-top:2px dashed #3a7a8a; padding-top:12px;">
+                    <span style="font-family:'Press Start 2P'; font-size:0.55rem; color:#c0c0f0;">🏅 PRÓXIMA MEDALLA</span>
+                    <div style="font-family:'VT323'; font-size:1.4rem;">🏅 10 DÍAS</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- DIVISOR + INFORMACIÓN EXTRA (TIEMPO GLOBAL) -->
+        <div style="display:flex; justify-content:space-between; margin:18px 0 8px; border-top:4px solid #2a7a8a; padding-top:14px;">
+            <div style="display:flex; align-items:center; gap:10px;">
+                <span class="bit-icon" style="background:#3cd0e0; width:20px; height:20px; box-shadow:3px 3px 0 #0e2a2a;"></span>
+                <span style="font-family:'VT323'; font-size:1.8rem; color:#b0f0d0;">COMPETENCIA EN VIVO</span>
+            </div>
+            <div>
+                <span style="font-family:'Press Start 2P'; background:#1e2a3a; padding:8px; border:3px solid #3ab0c0;">⏱️ TIEMPO TOTAL 42:18</span>
+            </div>
+        </div>
+
+        <!-- FOOTER -->
+        <footer class="pixel-footer">
+            <div>© 198X  CODE ARENA CORP.</div>
+            <div>
+                <span>█▓▒░ SECCIÓN 1/3 ░▒▓█</span>
+                <span style="margin-left:12px; font-family:'Press Start 2P';">v2.0</span>
+            </div>
+        </footer>
+
+        <!-- INDICADOR DE COMANDOS -->
+        <div style="font-family:'VT323'; font-size:1.3rem; color:#7fc3c9; text-align:right; margin-top:6px;">
+            ← → ↑ ↓  ·  A/B  ·  START
+        </div>
+    </div>
+</div>
+
+<script th:src="@{/webjars/jquery/jquery.min.js}"></script>
+<script th:src="@{/js/arena.js}"></script>
+<script>
+    (function () {
+        // ESTILO RETRO: Simulación de temporizador por sección y cambio de desafíos.
+        console.log("%c CODE ARENA · 8-BIT COMPETITION ", "background:#0f1a1f;color:#3ce0e8;font-size:16px;font-family:monospace;padding:4px;border:2px solid #c06c9c;");
+
+        // Temporizador de la sección (simulado)
+        let sectionSeconds = 9 * 60 + 42; // 09:42 inicial
+        const timerDisplay = document.getElementById('sectionTimerDisplay');
+        let timerInterval = null;
+
+        function updateTimerDisplay() {
+            if (!timerDisplay) return;
+            const mins = Math.floor(sectionSeconds / 60);
+            const secs = sectionSeconds % 60;
+            timerDisplay.textContent = `${mins.toString().padStart(2, '0')}:${secs.toString().padStart(2, '0')}`;
+        }
+
+        function startSectionTimer() {
+            if (timerInterval) clearInterval(timerInterval);
+            timerInterval = setInterval(() => {
+                if (sectionSeconds > 0) {
+                    sectionSeconds--;
+                    updateTimerDisplay();
+                    // Actualizar también el texto en la parte de test
+                    const testInfo = document.querySelector('.pixel-panel .code-mock + div + div + div');
+                    if (testInfo) {
+                        const mins = Math.floor(sectionSeconds / 60);
+                        const secs = sectionSeconds % 60;
+                        testInfo.innerHTML = `🧪 TEST 1/3 · ✅ PASÓ · TIEMPO RESTANTE SECCIÓN: ${mins.toString().padStart(2, '0')}:${secs.toString().padStart(2, '0')}`;
+                    }
+                } else {
+                    clearInterval(timerInterval);
+                    alert('⏰ ¡TIEMPO DE SECCIÓN AGOTADO! Pasa a la siguiente sección.');
+                }
+            }, 1000);
+        }
+
+        // Iniciar timer
+        startSectionTimer();
+
+        // Interacción básica con botones
+        document.getElementById('runCodeBtn')?.addEventListener('click', function () {
+            alert('▶️ CÓDIGO EJECUTADO (SIMULACIÓN)\n✅ Todos los tests pasaron.');
+        });
+
+        // Simular siguiente problema (cambiar texto)
+        document.getElementById('nextProblemBtn')?.addEventListener('click', function () {
+            const problemTitle = document.querySelector('.pixel-panel .panel-title span:first-child');
+            if (problemTitle) {
+                problemTitle.textContent = '📄 DESAFÍO C · BUCLES';
+            }
+            const descDiv = document.querySelector('.pixel-panel .panel-title + div');
+            if (descDiv) {
+                descDiv.innerHTML = 'Escribe un programa que imprima los primeros 10 números de la secuencia Fibonacci.';
+            }
+            const exampleSpan = document.querySelector('.pixel-panel .panel-title + div + div span');
+            if (exampleSpan) {
+                exampleSpan.textContent = '📌 EJEMPLO: salida → 0,1,1,2,3,5,8,13,21,34';
+            }
+            // reset timer (simular nuevo)
+            sectionSeconds = 12 * 60; // 12:00
+            updateTimerDisplay();
+            alert('⏩ Cambiaste al siguiente desafío. Nueva sección con 12:00.');
+        });
+
+        // Al hacer clic en problemas de la lista, actualizar título y timer
+        document.querySelectorAll('.problem-item').forEach((item, idx) => {
+            item.addEventListener('click', function (e) {
+                const problemName = this.querySelector('span:first-child')?.textContent || 'PROBLEMA';
+                const titleSpan = document.querySelector('.pixel-panel .panel-title span:first-child');
+                if (titleSpan) {
+                    titleSpan.textContent = `📄 ${problemName}`;
+                }
+                // Cambiar descripción y ejemplo
+                const descDiv = document.querySelector('.pixel-panel .panel-title + div');
+                const exampleSpan = document.querySelector('.pixel-panel .panel-title + div + div span');
+                if (descDiv) descDiv.innerHTML = `Resuelve el reto: ${problemName}.`;
+                if (exampleSpan) exampleSpan.textContent = `📌 EJEMPLO: implementa la lógica.`;
+                // Cambiar tiempo de sección (demo)
+                sectionSeconds = 8 * 60 + 30;
+                updateTimerDisplay();
+                // actualizar test info
+                const testInfo = document.querySelector('.pixel-panel .code-mock + div + div + div');
+                if (testInfo) testInfo.innerHTML = `🧪 TEST 1/3 · ⏳ PENDIENTE · TIEMPO RESTANTE SECCIÓN: 08:30`;
+                alert(`🔁 Se cambió a: ${problemName}. Temporizador reiniciado.`);
+            });
+        });
+
+        // Limpieza del intervalo (buena práctica)
+        window.addEventListener('beforeunload', function () {
+            if (timerInterval) clearInterval(timerInterval);
+        });
+
+        // Opcional: actualizar el timer global de la cabecera (fijo por ahora)
+    })();
+</script>
+
+</body>
+</html>
